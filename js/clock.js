@@ -11,6 +11,9 @@
 	/**
 	 * Parameters
 	 */
+	p.minuteSpeed = 0.04;
+	p.hourSpeed = 0.02;
+	p.clocksArray = [];
 
 	/**
 	 * Initialisation
@@ -36,11 +39,13 @@
 	 * Create clock group (2x3 clocks to make 1 number) 
 	 */
 	p.createClockGroup = function(x, y) {
+		// clock group container
 		p.clockGroup = new PIXI.DisplayObjectContainer();
 		p.clockGroup.x = x;
 		p.clockGroup.y = y;
 		p.stage.addChild(p.clockGroup);
 
+		// create 2x3 clocks
 		for ( var j=0 ; j<3 ; ++j ) {
 			for ( var i=0 ; i<2 ; ++i ) {
 				p.createClock(p.clockGroup, i, j);
@@ -85,6 +90,12 @@
 		p.centralScrew.beginFill(0x000000);
 		p.centralScrew.drawCircle(0, 0, 5);
 		p.clock.addChild(p.centralScrew);
+
+		// add minute hand and hour hand into clocks array
+		p.clocksArray.push({
+			minute: p.minuteHand,
+			hour: p.hourHand
+		});
 	}
 	
 	/**
@@ -93,7 +104,19 @@
 	 p.animate = function() {
 		requestAnimFrame(p.animate);
 
+		p.animateClocks();
+
 		p.renderer.render(p.stage);
+	};
+
+	/**
+	 * Animate clocks
+	 */
+	 p.animateClocks = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			p.clocksArray[i].minute.rotation += p.minuteSpeed;
+			p.clocksArray[i].hour.rotation += p.hourSpeed;
+		}
 	};
 
 	window.Clock = Clock;
