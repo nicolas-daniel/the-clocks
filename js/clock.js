@@ -92,9 +92,26 @@
 		p.clock.addChild(p.centralScrew);
 
 		// add minute hand and hour hand into clocks array
+		// object 	: (PIXI Graphics Object)
+		// speed 	: (Float) speed coef
+		// isMoved 	: (Boolean) true if needle curently rotating
+		// round 	: (Integer) number of clock round before stop rotating
+		// index 	: (Integer) current number of animation
 		p.clocksArray.push({
-			minute: p.minuteHand,
-			hour: p.hourHand
+			minute: {
+				object: p.minuteHand,
+				speed: p.minuteSpeed,
+				isMoved: true,
+				round: 2,
+				index: 1
+			},
+			hour: {
+				object: p.hourHand,
+				speed: p.hourSpeed,
+				isMoved: true,
+				round: 1,
+				index: 1
+			}
 		});
 	}
 	
@@ -104,20 +121,93 @@
 	 p.animate = function() {
 		requestAnimFrame(p.animate);
 
-		p.animateClocks();
+		p.updateTime();
 
 		p.renderer.render(p.stage);
 	};
 
 	/**
-	 * Animate clocks
+	 * Update time
 	 */
-	 p.animateClocks = function() {
+	 p.updateTime = function() {
+		// make a 2
 		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
-			p.clocksArray[i].minute.rotation += p.minuteSpeed;
-			p.clocksArray[i].hour.rotation += p.hourSpeed;
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
 		}
-	};
+	};	
+
+	/**
+	 * Set direction of the needle
+	 */
+	p.setDirection = function(clock, formule) {
+		if ( clock.isMoved && clock.object.rotation < 2 * ( clock.index + clock.round - 1 ) * Math.PI + formule ) {
+			clock.object.rotation += clock.speed;
+		} else {
+			if ( clock.isMoved ) {
+				clock.object.rotation = 2 * clock.index * Math.PI + formule;
+				clock.index++;
+			}
+			clock.isMoved = false;
+		}	
+	}
+
+	/**
+	 * Set direction to East
+	 */
+	p.setEastDirection = function(clock) {
+		p.setDirection(clock, 0);
+	}
+
+	/**
+	 * Set direction to South
+	 */
+	p.setSouthDirection = function(clock) {
+		p.setDirection(clock, Math.PI / 2);
+	}
+
+	/**
+	 * Set direction to West
+	 */
+	p.setWestDirection = function(clock) {
+		p.setDirection(clock, Math.PI);
+	}
+
+	/**
+	 * Set direction to North
+	 */
+	p.setNorthDirection = function(clock) {
+		p.setDirection(clock, (3/2)*Math.PI);
+	}
+
+	/**
+	 * Set direction to North-West
+	 */
+	p.setNorthWestDirection = function(clock) {
+		p.setDirection(clock, (3/4)*Math.PI);
+	}
 
 	window.Clock = Clock;
 })();
