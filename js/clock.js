@@ -27,20 +27,36 @@
 		p.renderer = PIXI.autoDetectRenderer(800, 300, {antialias: true});
 		document.body.appendChild(p.renderer.view);
 
-		p.createClock();
+		p.createClockGroup(50, 50);
 
 		requestAnimFrame(p.animate);
 	};
 
 	/**
+	 * Create clock group (2x3 clocks to make 1 number) 
+	 */
+	p.createClockGroup = function(x, y) {
+		p.clockGroup = new PIXI.DisplayObjectContainer();
+		p.clockGroup.x = x;
+		p.clockGroup.y = y;
+		p.stage.addChild(p.clockGroup);
+
+		for ( var j=0 ; j<3 ; ++j ) {
+			for ( var i=0 ; i<2 ; ++i ) {
+				p.createClock(p.clockGroup, i, j);
+			}
+		}
+	}
+
+	/**
 	 * Create clock
 	 */
-	p.createClock = function() {
+	p.createClock = function(container, i, j) {
 		// clock container
 		p.clock = new PIXI.DisplayObjectContainer();
-		p.clock.x = 100;
-		p.clock.y = 100;
-		p.stage.addChild(p.clock);
+		p.clock.x = 100 * i;
+		p.clock.y = 100 * j;
+		container.addChild(p.clock);
 				
 		// clock base
 		p.base = new PIXI.Graphics();
