@@ -74,7 +74,7 @@
 		p.minuteHand.beginFill(0x000000);
 		p.minuteHand.drawRect(2, 0, 46, 10);
 		p.minuteHand.pivot = new PIXI.Point(0, 5);
-		p.minuteHand.rotation = (1/4)*Math.PI;
+		p.minuteHand.rotation = (3/4)*Math.PI;
 		p.clock.addChild(p.minuteHand);
 
 		// hour hand
@@ -82,7 +82,7 @@
 		p.hourHand.beginFill(0x000000);
 		p.hourHand.drawRect(2, 0, 40, 10);
 		p.hourHand.pivot = new PIXI.Point(0, 5);
-		p.hourHand.rotation = (3/2)*Math.PI;
+		p.hourHand.rotation = (3/4)*Math.PI;
 		p.clock.addChild(p.hourHand);
 
 		// central screw
@@ -118,7 +118,7 @@
 	/**
 	 * Animate
 	 */
-	 p.animate = function() {
+	p.animate = function() {
 		requestAnimFrame(p.animate);
 
 		p.updateTime();
@@ -129,34 +129,8 @@
 	/**
 	 * Update time
 	 */
-	 p.updateTime = function() {
-		// make a 2
-		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
-			if ( i == 0 ) {
-				p.setEastDirection(p.clocksArray[i].hour);
-				p.setEastDirection(p.clocksArray[i].minute);
-			}
-			if ( i == 1 ) {
-				p.setSouthDirection(p.clocksArray[i].hour);
-				p.setWestDirection(p.clocksArray[i].minute);
-			}
-			if ( i == 2 ) {
-				p.setEastDirection(p.clocksArray[i].hour);
-				p.setSouthDirection(p.clocksArray[i].minute);
-			}
-			if ( i == 3 ) {
-				p.setWestDirection(p.clocksArray[i].hour);
-				p.setNorthDirection(p.clocksArray[i].minute);
-			}
-			if ( i == 4 ) {
-				p.setEastDirection(p.clocksArray[i].hour);
-				p.setNorthDirection(p.clocksArray[i].minute);
-			}
-			if ( i == 5 ) {
-				p.setWestDirection(p.clocksArray[i].hour);
-				p.setWestDirection(p.clocksArray[i].minute);
-			}
-		}
+	p.updateTime = function() {
+		p.setNumberNine();
 	};	
 
 	/**
@@ -203,10 +177,322 @@
 	}
 
 	/**
-	 * Set direction to North-West
+	 * Set direction to South-West
 	 */
-	p.setNorthWestDirection = function(clock) {
+	p.setSouthWestDirection = function(clock) {
 		p.setDirection(clock, (3/4)*Math.PI);
+	}
+
+	/**
+	 * Set number 0
+	 */
+	p.setNumberZero = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 1
+	 */
+	p.setNumberOne = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 || i == 2 || i == 4 ) {
+				p.setSouthWestDirection(p.clocksArray[i].hour);
+				p.setSouthWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setNorthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 2
+	 */
+	p.setNumberTwo = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksp.clocksArray[i].hour);
+				p.setEastDirection(p.clocksp.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksp.clocksArray[i].hour);
+				p.setWestDirection(p.clocksp.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksp.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksp.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setWestDirection(p.clocksp.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksp.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksp.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksp.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksp.clocksArray[i].hour);
+				p.setWestDirection(p.clocksp.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 3
+	 */
+	p.setNumberThree = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 4
+	 */
+	p.setNumberFour = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setSouthWestDirection(p.clocksArray[i].hour);
+				p.setSouthWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setNorthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 5
+	 */
+	p.setNumberFive = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 6
+	 */
+	p.setNumberSix = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 7
+	 */
+	p.setNumberSeven = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setSouthWestDirection(p.clocksArray[i].hour);
+				p.setSouthWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setSouthWestDirection(p.clocksArray[i].hour);
+				p.setSouthWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setNorthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 8
+	 */
+	p.setNumberEight = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
+	}
+
+	/**
+	 * Set number 9
+	 */
+	p.setNumberNine = function() {
+		for ( var i=0 ; i<p.clocksArray.length ; ++i ) {
+			if ( i == 0 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setSouthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 1 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setWestDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 2 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 3 ) {
+				p.setSouthDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 4 ) {
+				p.setEastDirection(p.clocksArray[i].hour);
+				p.setEastDirection(p.clocksArray[i].minute);
+			}
+			if ( i == 5 ) {
+				p.setWestDirection(p.clocksArray[i].hour);
+				p.setNorthDirection(p.clocksArray[i].minute);
+			}
+		}
 	}
 
 	window.Clock = Clock;
