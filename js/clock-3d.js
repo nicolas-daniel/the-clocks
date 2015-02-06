@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var Clock3d = function() { this.init(); };
+	var Clock3d = function(callback) { this.init(function(){callback();}); };
 	var p = Clock3d.prototype;
 
 	/**
@@ -21,8 +21,8 @@
 	/**
 	 * Initialisation
 	 */
-	p.init = function() {
-		p.initScene();
+	p.init = function(callback) {
+		p.initScene(function(){callback();});
 
 		p.initEventListeners();
 	};
@@ -41,11 +41,11 @@
 	/**
 	 * Init scene
 	 */
-	p.initScene = function() {
+	p.initScene = function(callback) {
 		p.scene = new THREE.Scene();
 		p.initCamera();
 		p.initLights();
-		p.initRenderer();
+		p.initRenderer(function(){callback();});
 
 		// create first h ([h]h:mm) : firstHour
 		p.createClockGroup(-360, 0, p.firstHourArray);
@@ -70,11 +70,15 @@
 		p.camera.lookAt(this.scene.position);
 	};
 
-	p.initRenderer = function() {
+	p.initRenderer = function(callback) {
 		p.renderer = new THREE.WebGLRenderer({antialias: true});
 		p.renderer.setSize( window.innerWidth, window.innerHeight );
 		p.renderer.setClearColor( 0xf0f0f0, 1 );
+		p.renderer.domElement.id = "canvas3d";
+		p.renderer.domElement.style.display = "none";
+		p.renderer.domElement.style.opacity = 0;
 		document.body.appendChild(p.renderer.domElement);
+		callback();
 	};
 
 	p.initLights = function() {

@@ -35,6 +35,7 @@
 	p.initPixi = function() {
 		p.stage = new PIXI.Stage(0xF0F0F0, true);
 		p.renderer = PIXI.autoDetectRenderer(800, 300, {antialias: true});
+		p.renderer.view.id = "canvas2d";
 		document.body.appendChild(p.renderer.view);
 
 		// create first h ([h]h:mm) : firstHour

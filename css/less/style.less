@@ -4,6 +4,7 @@
 html, body {
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 
 	background-color: @grey;
 }
@@ -20,6 +21,32 @@ canvas {
 	top: 50%;
 	left: 50%;
 	.translate(-50%, -50%);
+}
+
+.switcher {
+	position: absolute;
+	bottom: 48px;
+	left: 50%;
+	.translate(-50%, 0);
+}
+
+.switcher-button {
+	display: inline-block;
+	margin: 0 6px;
+	
+	.opensans;
+	font-size: 18px;
+	color: @mediumgrey;
+	text-decoration: none;
+
+	.transition(color 0.2s ease-out);
+
+	&:hover, &.is-active {
+		color: @black;
+		font-weight: bold;
+		
+		.transition(color 0.2s ease-in);
+	}
 }
 
 .text {
