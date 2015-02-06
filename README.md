@@ -1,6 +1,8 @@
 # The clocks
 
-The clocks is a canvas experiment inspired by [The clock clock white - Humans Since 1982](http://vimeo.com/52798481)
+The clocks is a 2d and 3d experiment inspired by [The clock clock white - Humans Since 1982](http://vimeo.com/52798481)
+
+The 2d version is make with [pixi.js](http://www.pixijs.com/) and the 3d version with [three.js](http://threejs.org/)
 
 
 ### Version
