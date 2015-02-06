@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>The clocks</title>
 
+	<link rel="icon" type="image/png" href="images/favicon.png">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 	<!-- @if NODE_ENV = 'dev' -->
