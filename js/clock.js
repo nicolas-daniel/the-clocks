@@ -17,6 +17,10 @@
 	p.secondHourArray = [];
 	p.firstMinuteArray = [];
 	p.secondMinuteArray = [];
+	p.currentFirstMinute = 0;
+	p.currentSecondMinute = 0;
+	p.currentFirstHour = 0;
+	p.currentSecondHour = 0;
 
 	/**
 	 * Initialisation
@@ -331,28 +335,28 @@
 	p.setNumberTwo = function(array) {
 		for ( var i=0 ; i<array.length ; ++i ) {
 			if ( i == 0 ) {
-				p.setEastDirection(p.clocksarray[i].hour);
-				p.setEastDirection(p.clocksarray[i].minute);
+				p.setEastDirection(array[i].hour);
+				p.setEastDirection(array[i].minute);
 			}
 			if ( i == 1 ) {
-				p.setSouthDirection(p.clocksarray[i].hour);
-				p.setWestDirection(p.clocksarray[i].minute);
+				p.setSouthDirection(array[i].hour);
+				p.setWestDirection(array[i].minute);
 			}
 			if ( i == 2 ) {
-				p.setEastDirection(p.clocksarray[i].hour);
-				p.setSouthDirection(p.clocksarray[i].minute);
+				p.setEastDirection(array[i].hour);
+				p.setSouthDirection(array[i].minute);
 			}
 			if ( i == 3 ) {
-				p.setWestDirection(p.clocksarray[i].hour);
-				p.setNorthDirection(p.clocksarray[i].minute);
+				p.setWestDirection(array[i].hour);
+				p.setNorthDirection(array[i].minute);
 			}
 			if ( i == 4 ) {
-				p.setEastDirection(p.clocksarray[i].hour);
-				p.setNorthDirection(p.clocksarray[i].minute);
+				p.setEastDirection(array[i].hour);
+				p.setNorthDirection(array[i].minute);
 			}
 			if ( i == 5 ) {
-				p.setWestDirection(p.clocksarray[i].hour);
-				p.setWestDirection(p.clocksarray[i].minute);
+				p.setWestDirection(array[i].hour);
+				p.setWestDirection(array[i].minute);
 			}
 		}
 	}
