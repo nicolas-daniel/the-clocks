@@ -22,8 +22,21 @@
 	 * Initialisation
 	 */
 	p.init = function() {
-		p.initScene();	
+		p.initScene();
+
+		p.initEventListeners();
 	};
+
+	/**
+	 * Initialisation of event listeners
+	 */
+	p.initEventListeners = function() {
+		document.addEventListener('mousedown', p.onMouseDown);
+		document.addEventListener('mousemove', p.onMouseMove);
+		document.addEventListener('mouseup', p.onMouseUp);
+		window.addEventListener('DOMMouseScroll', p.mousewheel, false);
+		window.addEventListener('mousewheel', p.mousewheel, false);
+	}
 
 	/**
 	 * Init scene
@@ -644,6 +657,63 @@
 				p.setNorthDirection(array[i].minute);
 			}
 		}
+	}
+
+	/**
+	 * Event listener mouse move
+	 */
+	p.onMouseMove = function(e) {
+		if (!p.mouseDown) {
+			return;
+		}
+
+		e.preventDefault();
+
+		var deltaX = e.clientX - p.mouseX,
+			deltaY = e.clientY - p.mouseY;
+		p.mouseX = e.clientX;
+		p.mouseY = e.clientY;
+		p.rotateScene(deltaX, deltaY);
+	}
+
+	/**
+	 * Event listener mouse down
+	 */
+	p.onMouseDown = function(e) {
+		e.preventDefault();
+
+		p.mouseDown = true;
+		p.mouseX = e.clientX;
+		p.mouseY = e.clientY;
+	}
+
+	/**
+	 * Event listener mouse up
+	 */
+	p.onMouseUp = function(e) {
+		e.preventDefault();
+
+		p.mouseDown = false;
+	}
+
+	/**
+	 * Rotate scene
+	 */
+	p.rotateScene = function(deltaX, deltaY) {
+		p.scene.rotation.y += deltaX / 100;
+		p.scene.rotation.x += deltaY / 100;
+	}
+
+	/**
+	 * Event listener mouse wheel
+	 */
+	p.mousewheel = function(e) {
+		var fovMAX = 160;
+		var fovMIN = 1;
+
+		p.camera.fov -= event.wheelDeltaY * 0.05;
+		p.camera.fov = Math.max( Math.min( p.camera.fov, fovMAX ), fovMIN );
+		p.camera.projectionMatrix = new THREE.Matrix4().makePerspective(p.camera.fov, window.innerWidth / window.innerHeight, p.camera.near, p.camera.far);
 	}
 
 	window.Clock3d = Clock3d;
