@@ -4,6 +4,8 @@ The clocks is a 2d and 3d experiment inspired by [The clock clock white - Humans
 
 The 2d version is make with [pixi.js](http://www.pixijs.com/) and the 3d version with [three.js](http://threejs.org/)
 
+### Demo
+[nicolasdaniel.fr/clocks](http://nicolasdaniel.fr/clocks)
 
 ### Version
 1.0.0
