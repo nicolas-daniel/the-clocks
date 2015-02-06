@@ -7,6 +7,16 @@
 	/**
 	 * Parameters
 	 */
+	p.minuteSpeed = 0.04;
+	p.hourSpeed = 0.02;
+	p.firstHourArray = [];
+	p.secondHourArray = [];
+	p.firstMinuteArray = [];
+	p.secondMinuteArray = [];
+	p.currentFirstMinute = 0;
+	p.currentSecondMinute = 0;
+	p.currentFirstHour = 0;
+	p.currentSecondHour = 0;
 
 	/**
 	 * Initialisation
@@ -24,7 +34,8 @@
 		p.initLights();
 		p.initRenderer();
 
-		p.createClock();
+		// create first h ([h]h:mm) : firstHour
+		p.createClockGroup(0, 0, p.firstHourArray);
 
 		p.render();
 	};
@@ -33,7 +44,7 @@
 		p.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		p.camera.position.x = -100;
 		p.camera.position.y = 50;
-		p.camera.position.z = 200;
+		p.camera.position.z = 400;
 		p.camera.updateProjectionMatrix();
 		p.camera.lookAt(this.scene.position);
 	};
@@ -58,14 +69,32 @@
 	};
 
 	/**
+	 * Create clock group (2x3 clocks to make 1 number) 
+	 */
+	p.createClockGroup = function(x, y, array) {
+		// clock group container
+		p.clockGroup = new THREE.Group();
+		p.clockGroup.x = x;
+		p.clockGroup.y = y;
+		p.scene.add(p.clockGroup);
+
+		// create 2x3 clocks
+		for ( var j=0 ; j<3 ; ++j ) {
+			for ( var i=0 ; i<2 ; ++i ) {
+				p.createClock(p.clockGroup, i, j, array);
+			}
+		}
+	}
+
+	/**
 	 * Create clock
 	 */
-	p.createClock = function() {
+	p.createClock = function(container, i, j, array) {
 		// clock container
 		p.clock = new THREE.Group();
-		p.clock.position.x = 0;
-		p.clock.position.y = 0;
-		p.scene.add(p.clock);
+		p.clock.position.x = (i-0.5) * 120;
+		p.clock.position.y = (j-1) * (-120);
+		container.add(p.clock);
 		
 		// clock base
 		p.geometry = new THREE.CylinderGeometry( 60, 60, 40, 20 );
