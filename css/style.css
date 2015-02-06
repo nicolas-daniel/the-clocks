@@ -25,21 +25,6 @@ canvas {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.hour {
-  position: absolute;
-  top: calc(50% - 200px);
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-family: "Open Sans";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 24px;
-  color: #000000;
-}
 .text {
   font-family: "Open Sans";
   -webkit-font-smoothing: antialiased;

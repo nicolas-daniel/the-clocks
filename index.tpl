@@ -10,8 +10,10 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="vendor/pixi.dev.js"></script>
+	<script src="vendor/three.min.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/clock.js"></script>
+	<script src="js/clock-2d.js"></script>
+	<script src="js/clock-3d.js"></script>
 	<!-- @endif -->
 
 	<!-- @if NODE_ENV = 'prod' -->

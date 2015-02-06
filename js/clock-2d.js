@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	var Clock = function() { this.init(); };
-	var p = Clock.prototype;
+	var Clock2d = function() { this.init(); };
+	var p = Clock2d.prototype;
 
 	/**
 	 * DOM elements
@@ -585,5 +585,5 @@
 		}
 	}
 
-	window.Clock = Clock;
+	window.Clock2d = Clock2d;
 })();

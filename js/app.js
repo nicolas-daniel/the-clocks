@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	p.init = function() {
 		console.log('%c Hi developers! %c  http://nicolasdaniel.fr  ', 'background: #121212; color: #fff;', 'background: #EEEEEE; color: #121212;');
 		
-		p.clock = new Clock();
+		// p.clock2d = new Clock2d();
+		p.clock3d = new Clock3d();
 	};
 
 	window.app = new App();
