@@ -8,7 +8,7 @@ The clocks is a canvas experiment inspired by [The clock clock white - Humans Si
 
 ### Installation
 
-You need to install node modules and launch Grunt:
+You need to install node modules :
 
 ```sh
 $ npm install
